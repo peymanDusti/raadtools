@@ -144,10 +144,10 @@ tidycopern <- function(date, varname, rescale = TRUE, xylim = NULL, latest = TRU
   
   nfiles <- nrow(files)
   ## progress
-  pb <- progress::progress_bar$new(
-    format = "  extracting [:bar] :percent in :elapsed",
-    total = nfiles, clear = FALSE, width= 60)
-  pb$tick(0)
+  #pb <- progress::progress_bar$new(
+  #  format = "  extracting [:bar] :percent in :elapsed",
+  #  total = nfiles, clear = FALSE, width= 60)
+  #pb$tick(0)
   ## the metadata
   tnc <- tidync::tidync(files$fullname[1])
   ## the transforms
