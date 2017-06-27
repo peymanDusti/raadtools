@@ -1,6 +1,10 @@
 xrange <- function(x) c(xmin(x), xmax(x))
 yrange <- function(x) c(ymin(x), ymax(x))
 
+gbind <- function(x) {
+  dm <- dim(x[[1]])
+  array(unlist(x), c(dm, length(x)))
+}
 
 
 ## internal rotate to match old behaviour
