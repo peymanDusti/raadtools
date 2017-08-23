@@ -111,6 +111,26 @@ readsst <-  function (date, time.resolution = c("daily", "monthly"),
 
 
 
+tidysst <- function(date, xylim = NULL, latest = TRUE, ..., inputfiles = NULL) {
 
+  files <- if (is.null(inputfiles)) sstfiles() else inputfiles
+  if (missing(date)) {
+    date <- if(latest) max(files$date) else min(files$date)
+  }
+  date <- timedateFrom(date)
+  files <- .processFiles(date, files, "daily")
+  
+  tnc <- tidync::tidync(files$fullname[1])
+  if (!is.null(xylim)) { 
+    tnc <- tnc %>% tidync::hyper_filter(lon = dplyr::between(lon, xmin(xylim), xmax(xylim)), 
+                         lat = dplyr::between(lat, ymin(xylim), ymax(xylim)))
+  } else {
+  
+  tnc <-     tnc %>%  tidync::hyper_filter() 
+  
+  }
+  tnc %>% tidync::hyper_tibble(select_var = "sst")
+  
+}
 
 
